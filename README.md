@@ -4,7 +4,6 @@
 
 This Chrome extension reloads the Amazon Vine page at random intervals and sends notifications to any webhook URL whenever new products appear. Ideal for receiving instant updates on new Vine offers (e.g. via Telegram, Slack, etc.).
 
----
 
 ## Features
 
@@ -16,7 +15,7 @@ This Chrome extension reloads the Amazon Vine page at random intervals and sends
 * 🌐 **Webhook Support**: Send GET or POST requests with `{ArticleName}` placeholder in URL or request body.
 * 🌎 **Internationalization**: UI supports multiple languages (e.g. English, German) via external JSON files.
 
----
+
 
 ## Installation
 
@@ -30,7 +29,7 @@ This Chrome extension reloads the Amazon Vine page at random intervals and sends
 4. Click **Load unpacked** and select the extension folder.
 5. The Vine Notifier icon appears in the toolbar.
 
----
+
 
 ## Configuration
 
@@ -47,7 +46,7 @@ This Chrome extension reloads the Amazon Vine page at random intervals and sends
    * **Language**: Click flag icon to switch UI language.
 3. Click **Save**.
 
----
+
 
 ## How It Works
 
@@ -58,7 +57,7 @@ This Chrome extension reloads the Amazon Vine page at random intervals and sends
 * **Background Script** (`background.js`) sends a GET/POST request to the webhook.
 * The page is reloaded after a random delay within the interval range.
 
----
+
 
 ## File Structure
 
@@ -72,7 +71,7 @@ This Chrome extension reloads the Amazon Vine page at random intervals and sends
 └── icons/               # Flag SVGs (de.svg, en.svg)
 ```
 
----
+
 
 ## Internationalization
 
@@ -90,7 +89,7 @@ UI texts are stored in separate JSON files under `locales/`, e.g.:
 
 `popup.js` dynamically loads the appropriate JSON based on the selected language, applies translations to all elements with `data-i18n`, and highlights the chosen flag. Placeholders (e.g. filter input placeholder) are also defined in these JSON files and replaced at runtime.
 
----
+
 
 ## License
 
