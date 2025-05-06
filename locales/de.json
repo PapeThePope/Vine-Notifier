@@ -1,0 +1,17 @@
+{
+    "settingsTitle": "Einstellungen",
+    "enabledLabel": "Aktiviert",
+    "webhookUrlLabel": "Webhook-URL ({ArticleName}):",
+    "httpMethodLabel": "HTTP-Methode:",
+    "postBodyLabel": "POST-Body:",
+    "minIntervalLabel": "Min. Refresh (Sek.):",
+    "maxIntervalLabel": "Max. Refresh (Sek.):",
+    "timeWindowLabel": "Zeitfenster:",
+    "fromLabel": "Von",
+    "toLabel": "Bis",
+    "filterLabel": "Filter (opt.):",
+    "filterPlaceholder": "z.B. Kamera",
+    "saveButton": "Speichern",
+    "saveSuccess": "Gespeichert!",
+    "saveError": "Bitte alle Pflichtfelder ausfüllen"
+  }

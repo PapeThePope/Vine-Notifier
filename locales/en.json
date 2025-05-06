@@ -1,0 +1,17 @@
+{
+    "settingsTitle": "Settings",
+    "enabledLabel": "Enabled",
+    "webhookUrlLabel": "Webhook URL ({ArticleName}):",
+    "httpMethodLabel": "HTTP-Method:",
+    "postBodyLabel": "POST Body:",
+    "minIntervalLabel": "Min Refresh (s):",
+    "maxIntervalLabel": "Max Refresh (s):",
+    "timeWindowLabel": "Time Window:",
+    "fromLabel": "From",
+    "toLabel": "To",
+    "filterLabel": "Filter (opt.):",
+    "filterPlaceholder": "e.g. camera",
+    "saveButton": "Save",
+    "saveSuccess": "Saved successfully!",
+    "saveError": "Please fill required fields"
+  } 

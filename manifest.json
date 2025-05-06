@@ -1,34 +1,36 @@
 {
-    "manifest_version": 3,
-    "name": "Amazon Vine Auto-Refresh Notifier",
-    "version": "1.0",
-    "description": "Aktualisiert automatisch die Amazon Vine Seite und sendet Webhooks für neue Produkte.",
-    "permissions": [
-      "storage"
-    ],
-    "host_permissions": [
-      "https://*/",
-      "http://*/"
-    ],
-    "content_scripts": [
-      {
-        "matches": [
-          "*://*.amazon.de/vine/*",
-          "*://*.amazon.com/vine/*",
-          "*://*.amazon.co.uk/vine/*",
-          "*://*.amazon.fr/vine/*",
-          "*://*.amazon.it/vine/*",
-          "*://*.amazon.es/vine/*"
-        ],
-        "js": ["content.js"],
-        "run_at": "document_idle"
-      }
-    ],
-    "background": {
-      "service_worker": "background.js"
-    },
-    "action": {
-      "default_popup": "popup.html",
-      "default_title": "Vine Notifier"
+  "manifest_version": 3,
+  "name": "Amazon Vine Auto-Refresh Notifier",
+  "version": "1.0",
+  "description": "Aktualisiert automatisch die Amazon Vine Seite und sendet Webhooks für neue Produkte.",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://*/",
+    "http://*/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.amazon.de/vine/*",
+        "*://*.amazon.com/vine/*",
+        "*://*.amazon.co.uk/vine/*",
+        "*://*.amazon.fr/vine/*",
+        "*://*.amazon.it/vine/*",
+        "*://*.amazon.es/vine/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
     }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Vine Notifier"
   }
+}

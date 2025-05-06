@@ -1,134 +1,71 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <title>Vine Notifier Einstellungen</title>
+  <meta charset="UTF-8">
+  <title>Vine Notifier</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      width: 320px;
-      background-color: #f0f2f5;
-      color: #333;
-    }
-    header {
-      background-color: #146eb4;
-      color: #fff;
-      padding: 16px;
-      text-align: center;
-      font-size: 1.25em;
-      font-weight: bold;
-    }
-    form {
-      padding: 16px;
-    }
-    label {
-      display: block;
-      margin: 12px 0 4px;
-      font-weight: 600;
-    }
-    input[type="text"],
-    input[type="number"],
-    input[type="time"],
-    select,
-    textarea {
-      width: 100%;
-      padding: 8px;
-      margin-top: 4px;
-      box-sizing: border-box;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 0.95em;
-    }
-    .toggle, .row {
-      display: flex;
-      align-items: center;
-      margin-top: 12px;
-    }
-    .toggle input {
-      margin-right: 8px;
-      transform: scale(1.2);
-    }
-    .row label {
-      flex: 0 0 60px;
-      margin: 0;
-      font-weight: normal;
-    }
-    .row input {
-      flex: 1;
-    }
-    button {
-      margin-top: 16px;
-      width: 100%;
-      padding: 10px;
-      background-color: #ff9900;
-      border: none;
-      border-radius: 4px;
-      color: #fff;
-      font-size: 1em;
-      cursor: pointer;
-      transition: background-color 0.2s;
-    }
-    button:hover {
-      background-color: #e68a00;
-    }
-    .note {
-      font-size: 0.85em;
-      color: #555;
-      margin-top: 8px;
-    }
+    body {font-family: Arial,sans-serif; margin:0; padding:0; width:340px; background:#f0f2f5; color:#333;}
+    header {background:#146eb4; color:#fff; padding:12px; text-align:center; position:relative;}
+    .flags {position:absolute; top:8px; right:12px; display:flex; gap:8px;}
+    .flag {width:24px; height:16px; cursor:pointer; border:2px solid transparent; border-radius:2px;}
+    .flag.selected {border-color:#ff9900;}
+    form {padding:16px;}
+    label {margin:12px 0 4px; font-weight:600; display:block;}
+    input, select, textarea {width:100%; padding:8px; margin-top:4px; box-sizing:border-box; border:1px solid #ccc; border-radius:4px; font-size:0.95em;}
+    .row, .toggle {display:flex; align-items:center; margin-top:12px;}
+    .toggle input {margin-right:8px; transform:scale(1.2);}
+    .row label {flex:0 0 80px; margin:0; font-weight:normal;}
+    button {margin-top:16px; width:100%; padding:10px; background:#ff9900; border:none; border-radius:4px; color:#fff; font-size:1em; cursor:pointer;}
+    button:hover {background:#e68a00;}
+    .note {font-size:0.85em; color:#555; margin-top:8px;}
   </style>
 </head>
 <body>
-  <h2>Einstellungen</h2>
+  <header id="hdrTitle" data-i18n="settingsTitle">Einstellungen</header>
+  <div class="flags">
+    <img src="icons/de.svg" id="lang-de" class="flag" alt="Deutsch">
+    <img src="icons/en.svg" id="lang-en" class="flag" alt="English">
+  </div>
   <form id="settingsForm">
-    <!-- Aktivierung -->
     <div class="toggle">
       <input type="checkbox" id="enabledSwitch" name="enabled">
-      <label for="enabledSwitch">Aktiviert</label>
+      <label for="enabledSwitch" data-i18n="enabledLabel">Aktiviert</label>
     </div>
 
-    <!-- Webhook URL -->
-    <label for="webhookUrl">Webhook-URL (<code>{ArticleName}</code>):</label>
-    <input type="text" id="webhookUrl" name="webhookUrl" placeholder="https://example.com/hook/{ArticleName}" required />
+    <label for="webhookUrl" data-i18n="webhookUrlLabel">Webhook-URL ({ArticleName}):</label>
+    <input type="text" id="webhookUrl" name="webhookUrl" placeholder="https://.../{ArticleName}" required>
 
-    <!-- HTTP-Methode -->
-    <label for="httpMethod">HTTP-Methode:</label>
+    <label for="httpMethod" data-i18n="httpMethodLabel">HTTP-Methode:</label>
     <select id="httpMethod" name="httpMethod">
       <option value="GET">GET</option>
       <option value="POST">POST</option>
     </select>
 
-    <!-- Body-Feld für POST -->
     <div id="bodyContainer" style="display:none;">
-      <label for="postBody">POST-Body (z.B. JSON):</label>
-      <textarea id="postBody" name="postBody" rows="4" placeholder="{ \"product\": \"{ArticleName}\" }"></textarea>
+      <label for="postBody" data-i18n="postBodyLabel">POST-Body:</label>
+      <textarea id="postBody" name="postBody" rows="4" placeholder='{ "product": "{ArticleName}" }'></textarea>
     </div>
 
-    <!-- Refresh-Intervalle -->
-    <label for="minInterval">Min. Refresh-Intervall (Sek.):</label>
-    <input type="number" id="minInterval" name="minInterval" min="1" required />
+    <label for="minInterval" data-i18n="minIntervalLabel">Min. Refresh (Sek.):</label>
+    <input type="number" id="minInterval" name="minInterval" min="1" required>
 
-    <label for="maxInterval">Max. Refresh-Intervall (Sek.):</label>
-    <input type="number" id="maxInterval" name="maxInterval" min="1" required />
+    <label for="maxInterval" data-i18n="maxIntervalLabel">Max. Refresh (Sek.):</label>
+    <input type="number" id="maxInterval" name="maxInterval" min="1" required>
 
-    <!-- Zeitfenster -->
-    <label>Zeitfenster</label>
+    <label data-i18n="timeWindowLabel">Zeitfenster:</label>
     <div class="row">
-      <label for="fromTime">Von</label>
-      <input type="time" id="fromTime" name="fromTime" required />
+      <label for="fromTime" data-i18n="fromLabel">Von</label>
+      <input type="time" id="fromTime" name="fromTime" required>
     </div>
     <div class="row">
-      <label for="toTime">Bis</label>
-      <input type="time" id="toTime" name="toTime" required />
+      <label for="toTime" data-i18n="toLabel">Bis</label>
+      <input type="time" id="toTime" name="toTime" required>
     </div>
 
-    <!-- Filter -->
-    <label for="filter">Filter (optional):</label>
-    <input type="text" id="filter" name="filter" placeholder="z.B. Kamera" />
+    <label for="filter" data-i18n="filterLabel">Filter (opt.):</label>
+    <input type="text" id="filter" name="filter" placeholder="z.B. Kamera">
 
-    <button type="submit">Speichern</button>
+    <button type="submit" data-i18n="saveButton">Speichern</button>
     <p id="statusMsg" class="note"></p>
   </form>
 
