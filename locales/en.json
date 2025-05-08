@@ -1,7 +1,7 @@
 {
     "settingsTitle": "Settings",
     "enabledLabel": "Enabled",
-    "webhookUrlLabel": "Webhook URL ({ArticleName}):",
+    "webhookUrlLabel": "Webhook-URL:",
     "httpMethodLabel": "HTTP-Method:",
     "postBodyLabel": "POST Body:",
     "minIntervalLabel": "Min Refresh (s):",

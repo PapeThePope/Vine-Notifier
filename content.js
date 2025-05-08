@@ -32,17 +32,39 @@ chrome.storage.local.get([
     if (maxSec<minSec) maxSec=minSec;
   
     document.querySelectorAll('#vvp-items-grid .vvp-item-tile').forEach(tile => {
-      let title='';
-      const el = tile.querySelector('.a-truncate-full');
-      title = el?.textContent.trim() || tile.querySelector('a')?.textContent.trim() || '';
-      if (!title || knownSet.has(title)) return;
-      knownSet.add(title);
-      if (!urlTpl) return;
-      if (filter && !title.toLowerCase().includes(filter)) return;
-  
-      // URL/Body erzeugen
-      const url  = urlTpl.replaceAll('{ArticleName}', encodeURIComponent(title));
-      const body = bodyTpl.replaceAll('{ArticleName}', title);
+      // 1) Titel auslesen
+    const titleEl = tile.querySelector('.vvp-item-product-title-container .a-truncate-full');
+    const title   = titleEl?.textContent.trim()
+                  || tile.querySelector('a')?.textContent.trim()
+                  || '';
+    if (!title || knownSet.has(title)) return;
+    knownSet.add(title);
+    if (!urlTpl) return;
+    if (filter && !title.toLowerCase().includes(filter)) return;
+
+    // 2) Link zur Produktseite
+    const linkEl  = tile.querySelector('a.a-link-normal[href*="/dp/"]');
+    const hrefRaw = linkEl?.getAttribute('href') || '';
+    const link    = hrefRaw
+      ? (hrefRaw.startsWith('http') ? hrefRaw : `${window.location.origin}${hrefRaw}`)
+      : '';
+
+    // 3) Bild-URL
+    const imageUrl = tile.dataset.imgUrl
+      || (tile.querySelector('img')?.src)
+      || '';
+
+    // 4) URL und Body mit allen Platzhaltern befüllen
+    //    Neue Platzhalter: {ArticleLink}, {ImageUrl}
+    const url  = urlTpl
+      .replaceAll('{ArticleName}', encodeURIComponent(title))
+      .replaceAll('{ArticleLink}', encodeURIComponent(link))
+      .replaceAll('{ImageUrl}', encodeURIComponent(imageUrl));
+
+    let body = bodyTpl
+      .replaceAll('{ArticleName}', title)
+      .replaceAll('{ArticleLink}', link)
+      .replaceAll('{ImageUrl}', imageUrl);
   
       // Nachricht senden
       chrome.runtime.sendMessage({

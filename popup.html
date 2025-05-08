@@ -32,8 +32,8 @@
       <label for="enabledSwitch" data-i18n="enabledLabel">Aktiviert</label>
     </div>
 
-    <label for="webhookUrl" data-i18n="webhookUrlLabel">Webhook-URL ({ArticleName}):</label>
-    <input type="text" id="webhookUrl" name="webhookUrl" placeholder="https://.../{ArticleName}" required>
+    <label for="webhookUrl" data-i18n="webhookUrlLabel">Webhook-URL:</label>
+    <input type="text" id="webhookUrl" name="webhookUrl" placeholder="https://..." required>
 
     <label for="httpMethod" data-i18n="httpMethodLabel">HTTP-Methode:</label>
     <select id="httpMethod" name="httpMethod">
@@ -43,7 +43,7 @@
 
     <div id="bodyContainer" style="display:none;">
       <label for="postBody" data-i18n="postBodyLabel">POST-Body:</label>
-      <textarea id="postBody" name="postBody" rows="4" placeholder='{ "product": "{ArticleName}" }'></textarea>
+      <textarea id="postBody" name="postBody" rows="4" placeholder='{ }'></textarea>
     </div>
 
     <label for="minInterval" data-i18n="minIntervalLabel">Min. Refresh (Sek.):</label>

@@ -12,7 +12,7 @@ This Chrome extension reloads the Amazon Vine page at random intervals and sends
 * ⏰ **Time Window**: Only active between specified `From` and `To` times.
 * ☑️ **Enable/Disable**: Toggle monitoring on/off in the popup.
 * 🔍 **Filter**: Optional keyword filter to report only matching product names.
-* 🌐 **Webhook Support**: Send GET or POST requests with `{ArticleName}` placeholder in URL or request body.
+* 🌐 **Webhook Support**: Send GET or POST requests with placeholders in URL or request body.
 * 🌎 **Internationalization**: UI supports multiple languages (e.g. English, German) via external JSON files.
 
 
@@ -37,9 +37,9 @@ This Chrome extension reloads the Amazon Vine page at random intervals and sends
 2. In the popup, set:
 
    * **Enabled**: Turn monitoring on or off.
-   * **Webhook URL**: Use `{ArticleName}` placeholder.
+   * **Webhook URL**: URL to the webhook. Placeholders are available here.
    * **HTTP Method**: GET or POST.
-   * **POST Body**: (only if POST) e.g. JSON with `{ArticleName}`.
+   * **POST Body**: (only if POST) e.g. JSON. You can use the available placeholders here.
    * **Min/Max Interval**: Seconds between reloads.
    * **Time Window**: Only run between chosen times.
    * **Filter**: Optional keyword to match product names.
@@ -47,29 +47,22 @@ This Chrome extension reloads the Amazon Vine page at random intervals and sends
 3. Click **Save**.
 
 
+## Placeholders
+
+Currently the available placeholders are:
+* `{ArticleName}`: Name of the article that was found
+* `{ArticleLink}`: Link to the Amazon page of the article
+* `{ImageUrl}`: Link to the Image of the product
+
 
 ## How It Works
 
 * **Content Script** (`content.js`) loads settings from `chrome.storage.local`.
 * It checks the current time against the configured time window.
-* It scans `#vvp-items-grid .vvp-item-tile` for new product titles not yet seen.
+* It scans for new product titles not yet seen.
 * New items trigger a message to the **Background** script.
 * **Background Script** (`background.js`) sends a GET/POST request to the webhook.
 * The page is reloaded after a random delay within the interval range.
-
-
-
-## File Structure
-
-```
-├── manifest.json        # Chrome Manifest V3
-├── content.js           # Scans Amazon Vine & sends messages
-├── background.js        # Executes webhook requests
-├── popup.html           # Settings UI
-├── popup.js             # Popup logic & i18n loader
-├── locales/             # JSON translation files (en.json, de.json)
-└── icons/               # Flag SVGs (de.svg, en.svg)
-```
 
 
 
@@ -82,7 +75,7 @@ UI texts are stored in separate JSON files under `locales/`, e.g.:
 {
   "settingsTitle": "Settings",
   "enabledLabel": "Enabled",
-  "webhookUrlLabel": "Webhook URL ({ArticleName}):",
+  "webhookUrlLabel": "Webhook-URL:",
   // ...
 }
 ```

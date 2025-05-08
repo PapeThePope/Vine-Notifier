@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Amazon Vine Auto-Refresh Notifier",
+  "name": "Vine Notifier",
   "version": "1.0",
-  "description": "Aktualisiert automatisch die Amazon Vine Seite und sendet Webhooks für neue Produkte.",
+  "description": "Refreshes the Amazon Vine sites automatically and messages a webhook, when a new product was found.",
   "permissions": [
     "storage"
   ],
